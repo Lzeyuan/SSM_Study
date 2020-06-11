@@ -35,25 +35,30 @@ public class UploadServlet {
         String uploadFileName = file.getOriginalFilename();
         String prefix = uploadFileName.substring(0, uploadFileName.indexOf("."));
         String suffix = uploadFileName.substring(uploadFileName.lastIndexOf("."));
-        uploadFileName = prefix + " " + date + suffix;
+        uploadFileName = date + " " + prefix + suffix;
 
         // 文件名为空返回上传页
         if ("".equals(uploadFileName)) {
             return "file/upload";
         }
 
-        System.out.println("上传文件名" + uploadFileName);
+        // System.out.println("上传文件名" + uploadFileName);
 
         // 上传路径
-        String path = request.getServletContext().getRealPath("/upload") + "\\" + date;
+        String path = request.getServletContext().getRealPath("/upload");
 
-        // 如果文件夹不存在，则新建
         File realPath = new File(path);
         if (!realPath.exists()) {
             realPath.mkdir();
         }
 
-        System.out.println("保存地址：" + realPath);
+        // 如果文件夹不存在，则新建
+        realPath = new File(path + "\\" + date);
+        if (!realPath.exists()) {
+            realPath.mkdir();
+        }
+
+        // System.out.println("保存地址：" + realPath);
 
         // 文件输入流
         InputStream is = null;

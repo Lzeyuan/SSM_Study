@@ -32,7 +32,7 @@
 	        if(item.text == "文件上传"){
 	        	addTab(1,"文件上传",'${ctx}/upload/view');
 	        } else if(item.text == "文件下载") {
-	        	addTab(2,"文件下载",'${ctx}/download/view');
+	        	addTab(2,"文件下载",'${ctx}/download');
 	        } else if(item.text == "用户信息管理") {
 	        	addTab(3,"用户信息管理",'${ctx}/user');
 	        } else if(item.text == "用户信息列表") {
