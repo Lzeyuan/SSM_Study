@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd">
+
+  <!-- 引入sql配置 -->
+  <context:property-placeholder location="classpath:db.properties" />
+
+  <!-- 1.将事务交给spring管理 -->
+  <!-- 外部配置资源导入，变量名称最好加前缀 -->
+  <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    <property name="driverClassName" value="${mysql.driver}"/>
+    <property name="url" value="${mysql.url}"/>
+    <property name="username" value="${mysql.username}"/>
+    <property name="password" value="${mysql.password}"/>
+  </bean>
+
+  <!-- 2.mybatis创建工厂对象 -->
+  <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <!-- 导入数据对象 -->
+    <property name="dataSource" ref="dataSource"/>
+    <!-- 导入mybatis配置-->
+    <property name="configLocation" value="classpath:mybatis-config.xml"/>
+  </bean>
+
+  <!--3.动态实现Dao接口注入到Spring容器中-->
+  <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+    <!--注入sqlSessionFactory-->
+    <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    <!--扫描dao包-->
+    <!-- mapper类名要与mapper.xml相同 -->
+    <property name="basePackage" value="com.shaoda.user.dao"/>
+  </bean>
+
+</beans>
