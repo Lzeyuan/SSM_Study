@@ -31,6 +31,6 @@
   </select>
 
   <select id="pageLimit" parameterType="map" resultType="user">
-    SELECT * FROM user limit #{startIndex}, #{endIndex};
+    SELECT * FROM user, student AS s WHERE s.Teacher = user.name LIMIT #{startIndex}, #{endIndex};
   </select>
 </mapper>
