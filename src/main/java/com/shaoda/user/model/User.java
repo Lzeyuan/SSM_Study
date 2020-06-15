@@ -2,12 +2,16 @@ package com.shaoda.user.model;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.shaoda.core.model.Model;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class User extends Model {
 
     // 登录名

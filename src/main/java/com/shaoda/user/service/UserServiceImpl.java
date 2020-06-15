@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class UserServiceImpl implements UserService<User> {
@@ -61,6 +60,5 @@ public class UserServiceImpl implements UserService<User> {
         map.put("endIndex", pageIndex + 12);
         return userMapper.pageLimit(map);
     }
-
 
 }
